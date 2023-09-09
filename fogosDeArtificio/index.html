@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+<body>
+    <canvas id="c"></canvas>
+</body>
+<script>
+    var w = c.width = window.innerWidth,
+        h = c.height = window.innerHeight,
+        ctx = c.getContext('2d'),
+
+        hw = w / 2,
+        hh = h / 2,
+
+        opts = {
+            strings: ['HAPPY', 'BIRTHDAY'],
+            charSize: 30,
+            charSpacing: 35,
+            lineHeight: 40,
+
+            cx: w / 2,
+            cy: h / 2,
+
+            fireworkPrevPoints: 10,
+            fireworkBaseLine: 5,
+            fireworkAddedLineWidth: 8,
+            fireworkSpawnTime: 200,
+            fireworkBaseReachTime: 30,
+            fireworkAddedReachTime: 30,
+            fireworkCircleBaseSize: 20,
+            fireworkCircleAddedSize: 10,
+            fireworkCircleBaseTime: 30,
+            fireworkCircleBaseTime: 30,
+            fireworkCircleFadeBaseTime: 10,
+            fireworkCircleFadeAddedTime: 5,
+            fireworkBaseShards: 5,
+            fireworkAddedShards: 5,
+            fireworkShardPrevPoints: 3,
+            fireworkShardBaseVel: 4,
+            fireworkShardAddedVel: 2,
+            fireworkShardBaseSize: 3,
+            fireworkShardAddedSize: 3,
+            gravity: .1,
+            upflow: -1,
+            letterContemplatingWaitTime: 360,
+            balloonSpawnTime: 28,
+            balloonAddedTnflateTime: 10,
+            balloonBaseSize: 20,
+            balloonAddedSize: 20,
+            balloonBaseVel: .4,
+            balloonAddedVel: .4,
+            balloonBaseRadian: -(Math.PI / 2 - .5),
+            balloonAddedRadian: -1,
+        },
+        calc = {
+            totalWidth: opts.charSpacing * Math.max(opts.strings[0].length, opts.strings[1].length)
+        }
+
+    Letter.prototype.step = function () {
+
+        if (this.phase === 'firework') {
+
+            if (!this.spawned) {
+
+                ++this.tick;
+                if (this.tick >= this.spawningTime) {
+
+                    this.tick 0;
+                    this.spawned = true;
+                } else {
+
+                    ++this.tick;
+
+                    var linearProportion = this.tick / this.reachTime,
+                        armonicProportion = Math.sin(linearProportion + TauQuarter),
+
+                        x = linearProportion * this.x,
+                        y = hh + armonicProportion * this.fireworkDy;
+
+                    if (this.prevPoints.length > opts.fireworkPrevPoints)
+                        this.prevPoints.shift();
+
+                    this.prevPoints.push([x, y, linearProportion + this.lineWidth]);
+                    
+                    var lineWidthProportion = 1 / (this.prevPoints.length - 1 );
+</script>
+
+</html>
